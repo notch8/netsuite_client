@@ -6,6 +6,8 @@
 
 Ruby soap4r-based Netsuite client. 
 
+Currently being updated for 2010_02
+
 == FEATURES/PROBLEMS:
 
 Provides a simple way to access Netsuite data, such as sales orders, inventory items, invoices etc. A valid Netsuite account and a certain familiarity with Netsuite record data types are required.

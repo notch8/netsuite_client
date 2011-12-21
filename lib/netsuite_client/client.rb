@@ -190,7 +190,7 @@ class NetsuiteClient
   end
 
   def constantize(klass)
-    constantize(klass)
+    klass.constantize
 
     rescue NameError
       "NetSuite::SOAP::#{klass}".constantize

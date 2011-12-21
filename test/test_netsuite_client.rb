@@ -6,7 +6,7 @@ class TestNetsuiteClient < Test::Unit::TestCase
   def setup
     #ENV['NS_ENDPOINT_URL'] ||= 'https://webservices.sandbox.netsuite.com/services/NetSuitePort_2009_1'
 
-    unless ENV['NS_ACCOUNT_ID'] && ENV['NS_EMAIL'] && ENV['NS_PASSWORD'] 
+    unless ENV['NS_ACCOUNT_ID'] && ENV['NS_EMAIL'] && ENV['NS_PASSWORD']
       puts "Ensure that your environment variables are set: NS_ACCOUNT_ID, NS_EMAIL, NS_PASSWORD"
       exit(-1)
     end
@@ -14,7 +14,7 @@ class TestNetsuiteClient < Test::Unit::TestCase
     @client = NetsuiteClient.new(:account_id => ENV['NS_ACCOUNT_ID'], :email => ENV['NS_EMAIL'], :password => ENV['NS_PASSWORD'])
     #@client.debug = true
   end
-  
+
   def test_init
     assert_not_nil @client
   end
@@ -42,7 +42,7 @@ class TestNetsuiteClient < Test::Unit::TestCase
     ref.itemId = 'test inventory item'
     res = @client.add(ref)
     assert_not_nil res
-    puts res.inspect
+    #puts res.inspect
     assert res.success? || res.error_code == 'DUP_ITEM'
   end
 
@@ -62,14 +62,14 @@ class TestNetsuiteClient < Test::Unit::TestCase
 
     item = @client.find_by('ItemSearchBasic', 'itemId', 'test inventory item')[0]
     assert item.displayName != new_name
-    
+
     ref = InventoryItem.new
     ref.xmlattr_internalId = item.xmlattr_internalId
     ref.displayName = new_name
     res = @client.update(ref)
     assert_not_nil res
     assert res.success?
-    
+
     item = @client.find_by('ItemSearchBasic', 'itemId', 'test inventory item')[0]
     assert item.displayName == new_name
   end

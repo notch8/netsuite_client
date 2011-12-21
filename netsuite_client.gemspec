@@ -2,10 +2,10 @@
 
 Gem::Specification.new do |s|
   s.name = %q{netsuite_client}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Vlad Jebelev"]
+  s.authors = ["Vlad Jebelev", "Rob Kaufman"]
   s.date = %q{2010-07-07}
   s.description = %q{Ruby soap4r-based Netsuite client.}
   s.email = ["vlad@jebelev.com"]
@@ -32,4 +32,5 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<hoe>, [">= 2.3.3"])
   end
+  s.add_dependency(%q<soap4r-ruby1.9>, [">= 2.0"])
 end

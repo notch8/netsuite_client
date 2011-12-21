@@ -32,7 +32,7 @@ class NetsuiteClient
   end
 
   attr_accessor :logger
-  
+
   def logger
     @logger ||= Logger.new(STDOUT)
   end
@@ -42,7 +42,7 @@ class NetsuiteClient
 
     @driver = NetSuitePortType.new(@config[:endpoint_url] || NetSuitePortType::DefaultEndpointUrl)
     @driver.headerhandler.add(PassportHeaderHandler.new(:email => @config[:email], :password => @config[:password], :account => @config[:account_id]))
-    @driver.headerhandler.add(PreferencesHeaderHandler.new)      
+    @driver.headerhandler.add(PreferencesHeaderHandler.new)
     @driver.headerhandler.add(SearchPreferencesHeaderHandler.new)
   end
 
@@ -190,7 +190,7 @@ class NetsuiteClient
   end
 
   def constantize(klass)
-    klass.constantize
+    constantize(klass)
 
     rescue NameError
       "NetSuite::SOAP::#{klass}".constantize

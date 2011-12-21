@@ -4,8 +4,8 @@
 
 class String
   if Module.method(:const_get).arity == 1
-    def constantize #:nodoc:
-      names = self.split('::')
+    def constantize(camel_cased_word)
+      names = camel_cased_word.split('::')
       names.shift if names.empty? || names.first.empty?
 
       constant = Object
@@ -21,7 +21,7 @@ class String
 
       constant = Object
       names.each do |name|
-        constant = constant.const_get(name, false) || constant.const_missing(name)
+        constant = constant.const_defined?(name, false) ? constant.const_get(name) : constant.const_missing(name)
       end
       constant
     end

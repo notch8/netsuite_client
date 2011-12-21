@@ -4,7 +4,7 @@
 
 == DESCRIPTION:
 
-Ruby soap4r-based Netsuite client. 
+Ruby soap4r-based Netsuite client.
 
 == FEATURES/PROBLEMS:
 
@@ -17,12 +17,12 @@ Best to be used together with Rails Netsuite plugin which offers tighter integra
 
   client = NetsuiteClient.new(:account_id => 1, :email => 'xxx@xxx.com', :password => 'password')
   sales_order = client.find_by_internal_id('TransactionSearchBasic', 1)
-  
+
 
 == REQUIREMENTS:
 
   * a working Netsuite account
-  * ruby 1.8.6/1.8.7
+  * ruby 1.9+
   * soap4r
 
 == INSTALL:

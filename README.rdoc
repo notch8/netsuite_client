@@ -22,7 +22,7 @@ Best to be used together with Rails Netsuite plugin which offers tighter integra
 == REQUIREMENTS:
 
   * a working Netsuite account
-  * ruby 1.9+
+  * ruby 1.9
   * soap4r
 
 == INSTALL:

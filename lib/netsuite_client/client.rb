@@ -94,6 +94,39 @@ class NetsuiteClient
     full_basic_search(basic)
   end
 
+  def in_find_by(klass, name, value)
+    basic = constantize(klass).new
+
+    ref = nil
+    case value.class.to_s
+    when 'Fixnum'
+      ref = basic.send("#{name}=".to_sym, SearchLongField.new)
+      ref.xmlattr_operator = SearchLongFieldOperator::EqualTo
+      ref.searchValue = value
+    when 'Hash'
+      ref = basic.send("#{name}=".to_sym, SearchDateField.new)
+      ref.xmlattr_operator = value[:operator]
+      ref.predefinedSearchValue = value[:predifined]
+    else
+      ref = basic.send("#{name}=".to_sym, SearchStringField.new)
+      ref.xmlattr_operator = SearchStringFieldOperator::Is
+      ref.searchValue = value
+    end
+
+    records, res = exec_basic_search(basic)
+    unless res && res.status.xmlattr_isSuccess
+      return []
+    end
+
+    yield(records)
+    if res.totalPages > 1
+      while res.pageIndex < res.totalPages
+        next_records, res = exec_next_search(res.searchId, res.pageIndex+1)
+        yield(next_records)
+      end
+    end
+  end
+
   def get(klass, id)
     ref = RecordRef.new
     ref.xmlattr_type = constantize(klass)
